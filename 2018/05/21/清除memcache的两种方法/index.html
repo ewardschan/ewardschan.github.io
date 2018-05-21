@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="//ewards.cn">
-  <title>Linux系统部署的tomcat启动时间过长 | 小土的博客</title>
+  <title>清除memcache的两种方法 | 小土的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="tomcat部署的应用启动时间过长问题解决办法。 找到:1$JAVA_HOME/jre/lib/security/Java.security： 如果是使用yum默认路径安装的JDK，则:1/usr/lib/jvm/java-1.8.0/jre/lib/security/java.security 将:1securerandom.source = file:/dev/random 或者:1secur">
+  <meta name="description" content="默认memcache会监听11221端口，如果想清空服务器上memecache的缓存，大家一般使用的是：12telnet localhost 11211  flush_all 同样也可以使用：1echo &quot;flush_all&quot; | nc localhost 11211 使用flush_all 后并不是删除memcache上的key，而是置为过期">
 <meta name="keywords" content="技术记事">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux系统部署的tomcat启动时间过长">
-<meta property="og:url" content="//ewards.cn/2018/05/17/Linux系统部署的tomcat启动时间过长/index.html">
+<meta property="og:title" content="清除memcache的两种方法">
+<meta property="og:url" content="//ewards.cn/2018/05/21/清除memcache的两种方法/index.html">
 <meta property="og:site_name" content="小土的博客">
-<meta property="og:description" content="tomcat部署的应用启动时间过长问题解决办法。 找到:1$JAVA_HOME/jre/lib/security/Java.security： 如果是使用yum默认路径安装的JDK，则:1/usr/lib/jvm/java-1.8.0/jre/lib/security/java.security 将:1securerandom.source = file:/dev/random 或者:1secur">
+<meta property="og:description" content="默认memcache会监听11221端口，如果想清空服务器上memecache的缓存，大家一般使用的是：12telnet localhost 11211  flush_all 同样也可以使用：1echo &quot;flush_all&quot; | nc localhost 11211 使用flush_all 后并不是删除memcache上的key，而是置为过期">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-21T06:29:54.367Z">
+<meta property="og:updated_time" content="2018-05-21T06:28:49.802Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux系统部署的tomcat启动时间过长">
-<meta name="twitter:description" content="tomcat部署的应用启动时间过长问题解决办法。 找到:1$JAVA_HOME/jre/lib/security/Java.security： 如果是使用yum默认路径安装的JDK，则:1/usr/lib/jvm/java-1.8.0/jre/lib/security/java.security 将:1securerandom.source = file:/dev/random 或者:1secur">
+<meta name="twitter:title" content="清除memcache的两种方法">
+<meta name="twitter:description" content="默认memcache会监听11221端口，如果想清空服务器上memecache的缓存，大家一般使用的是：12telnet localhost 11211  flush_all 同样也可以使用：1echo &quot;flush_all&quot; | nc localhost 11211 使用flush_all 后并不是删除memcache上的key，而是置为过期">
   
   
     <link rel="icon" href="/assets/blogImg/ewardschan.jpg">
@@ -165,33 +165,29 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Linux系统部署的tomcat启动时间过长" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-清除memcache的两种方法" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Linux系统部署的tomcat启动时间过长
+      清除memcache的两种方法
     </h1>
   
 
         
-        <a href="/2018/05/17/Linux系统部署的tomcat启动时间过长/" class="archive-article-date">
-  	<time datetime="2018-05-17T04:25:07.146Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-17</time>
+        <a href="/2018/05/21/清除memcache的两种方法/" class="archive-article-date">
+  	<time datetime="2018-05-21T06:24:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-21</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>tomcat部署的应用启动时间过长问题解决办法。</p>
-<h3 id="找到"><a href="#找到" class="headerlink" title="找到:"></a>找到:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$JAVA_HOME</span>/jre/lib/security/Java.security：</span><br></pre></td></tr></table></figure>
-<h3 id="如果是使用yum默认路径安装的JDK，则"><a href="#如果是使用yum默认路径安装的JDK，则" class="headerlink" title="如果是使用yum默认路径安装的JDK，则:"></a>如果是使用yum默认路径安装的JDK，则:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/lib/jvm/java-1.8.0/jre/lib/security/java.security</span><br></pre></td></tr></table></figure>
-<h3 id="将"><a href="#将" class="headerlink" title="将:"></a>将:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">securerandom.source = file:/dev/random</span><br></pre></td></tr></table></figure>
-<h3 id="或者"><a href="#或者" class="headerlink" title="或者:"></a>或者:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">securerandom.source = file:/dev/urandom</span><br></pre></td></tr></table></figure>
-<h3 id="修改为："><a href="#修改为：" class="headerlink" title="修改为："></a>修改为：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">securerandom.source=file:/dev/./urandom</span><br></pre></td></tr></table></figure>
-
+        <h3 id="默认memcache会监听11221端口，如果想清空服务器上memecache的缓存，大家一般使用的是："><a href="#默认memcache会监听11221端口，如果想清空服务器上memecache的缓存，大家一般使用的是：" class="headerlink" title="默认memcache会监听11221端口，如果想清空服务器上memecache的缓存，大家一般使用的是："></a>默认memcache会监听11221端口，如果想清空服务器上memecache的缓存，大家一般使用的是：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">telnet localhost 11211  </span><br><span class="line">flush_all</span><br></pre></td></tr></table></figure>
+<h3 id="同样也可以使用："><a href="#同样也可以使用：" class="headerlink" title="同样也可以使用："></a>同样也可以使用：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"flush_all"</span> | nc localhost 11211</span><br></pre></td></tr></table></figure>
+<h3 id="使用flush-all-后并不是删除memcache上的key，而是置为过期"><a href="#使用flush-all-后并不是删除memcache上的key，而是置为过期" class="headerlink" title="使用flush_all 后并不是删除memcache上的key，而是置为过期"></a>使用flush_all 后并不是删除memcache上的key，而是置为过期</h3>
       
 
       
@@ -260,7 +256,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://ewards.cn/2018/05/17/Linux系统部署的tomcat启动时间过长/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://ewards.cn/2018/05/21/清除memcache的两种方法/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -274,18 +270,9 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2018/05/21/清除memcache的两种方法/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          清除memcache的两种方法
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/05/17/利用let s encrypt制作免费SSL给站点加绿锁/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">利用Let s Encrypt制作免费SSL给站点加绿锁</div>
+    <a href="/2018/05/17/Linux系统部署的tomcat启动时间过长/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Linux系统部署的tomcat启动时间过长</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -324,7 +311,7 @@ var _hmt = _hmt || [];
 <script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script>
 <script>
 var gitment = new Gitment({
-  id: "//ewards.cn/2018/05/17/Linux系统部署的tomcat启动时间过长/",
+  id: "//ewards.cn/2018/05/21/清除memcache的两种方法/",
   owner: 'ewardschan',
   repo: 'ewardschan.github.io',
   oauth: {

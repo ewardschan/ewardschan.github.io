@@ -166,31 +166,29 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-利用let s encrypt制作免费SSL给站点加绿锁" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-清除memcache的两种方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/17/利用let s encrypt制作免费SSL给站点加绿锁/">利用Let s Encrypt制作免费SSL给站点加绿锁</a>
+      <a class="article-title" href="/2018/05/21/清除memcache的两种方法/">清除memcache的两种方法</a>
     </h1>
   
 
         
-        <a href="/2018/05/17/利用let s encrypt制作免费SSL给站点加绿锁/" class="archive-article-date">
-  	<time datetime="2018-05-17T04:25:07.146Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-17</time>
+        <a href="/2018/05/21/清除memcache的两种方法/" class="archive-article-date">
+  	<time datetime="2018-05-21T06:24:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-21</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="安装脚本"><a href="#安装脚本" class="headerlink" title="安装脚本:"></a>安装脚本:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https://get.acme.sh | sh</span><br></pre></td></tr></table></figure>
-<h3 id="申请证书"><a href="#申请证书" class="headerlink" title="申请证书"></a>申请证书</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/root/.acme.sh/acme.sh --issue -k 4096 -w /usr/<span class="built_in">local</span>/nginx/html/ -d abc.com -d www.abc.com</span><br></pre></td></tr></table></figure>
-<h3 id="安装证书后期会自动更新"><a href="#安装证书后期会自动更新" class="headerlink" title="安装证书后期会自动更新"></a>安装证书后期会自动更新</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/root/.acme.sh/acme.sh --installcert -d abc.com --keypath /etc/ssl/abc.com.key --fullchainpath /etc/ssl/abc.com.crt --reloadcmd <span class="string">"/usr/local/nginx/sbin/nginx -s reload"</span></span><br></pre></td></tr></table></figure>
-<h3 id="自签名，主要用于默认的vhost"><a href="#自签名，主要用于默认的vhost" class="headerlink" title="自签名，主要用于默认的vhost"></a>自签名，主要用于默认的vhost</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl req -newkey rsa:4096 -nodes -keyout server.key -x509 -days 3650 -out server.crt</span><br></pre></td></tr></table></figure>
-
+        <h3 id="默认memcache会监听11221端口，如果想清空服务器上memecache的缓存，大家一般使用的是："><a href="#默认memcache会监听11221端口，如果想清空服务器上memecache的缓存，大家一般使用的是：" class="headerlink" title="默认memcache会监听11221端口，如果想清空服务器上memecache的缓存，大家一般使用的是："></a>默认memcache会监听11221端口，如果想清空服务器上memecache的缓存，大家一般使用的是：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">telnet localhost 11211  </span><br><span class="line">flush_all</span><br></pre></td></tr></table></figure>
+<h3 id="同样也可以使用："><a href="#同样也可以使用：" class="headerlink" title="同样也可以使用："></a>同样也可以使用：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"flush_all"</span> | nc localhost 11211</span><br></pre></td></tr></table></figure>
+<h3 id="使用flush-all-后并不是删除memcache上的key，而是置为过期"><a href="#使用flush-all-后并不是删除memcache上的key，而是置为过期" class="headerlink" title="使用flush_all 后并不是删除memcache上的key，而是置为过期"></a>使用flush_all 后并不是删除memcache上的key，而是置为过期</h3>
       
 
       
@@ -198,11 +196,22 @@ var _hmt = _hmt || [];
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术记事</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/17/利用let s encrypt制作免费SSL给站点加绿锁/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/21/清除memcache的两种方法/">展开全文 >></a>
         </p>
       
 
@@ -266,11 +275,99 @@ var _hmt = _hmt || [];
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术记事</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/05/17/Linux系统部署的tomcat启动时间过长/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-利用let s encrypt制作免费SSL给站点加绿锁" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/17/利用let s encrypt制作免费SSL给站点加绿锁/">利用Let s Encrypt制作免费SSL给站点加绿锁</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/17/利用let s encrypt制作免费SSL给站点加绿锁/" class="archive-article-date">
+  	<time datetime="2018-05-17T04:25:07.146Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="安装脚本"><a href="#安装脚本" class="headerlink" title="安装脚本:"></a>安装脚本:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https://get.acme.sh | sh</span><br></pre></td></tr></table></figure>
+<h3 id="申请证书"><a href="#申请证书" class="headerlink" title="申请证书"></a>申请证书</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/root/.acme.sh/acme.sh --issue -k 4096 -w /usr/<span class="built_in">local</span>/nginx/html/ -d abc.com -d www.abc.com</span><br></pre></td></tr></table></figure>
+<h3 id="安装证书后期会自动更新"><a href="#安装证书后期会自动更新" class="headerlink" title="安装证书后期会自动更新"></a>安装证书后期会自动更新</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/root/.acme.sh/acme.sh --installcert -d abc.com --keypath /etc/ssl/abc.com.key --fullchainpath /etc/ssl/abc.com.crt --reloadcmd <span class="string">"/usr/local/nginx/sbin/nginx -s reload"</span></span><br></pre></td></tr></table></figure>
+<h3 id="自签名，主要用于默认的vhost"><a href="#自签名，主要用于默认的vhost" class="headerlink" title="自签名，主要用于默认的vhost"></a>自签名，主要用于默认的vhost</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl req -newkey rsa:4096 -nodes -keyout server.key -x509 -days 3650 -out server.crt</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术记事</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/17/利用let s encrypt制作免费SSL给站点加绿锁/">展开全文 >></a>
         </p>
       
 
@@ -387,6 +484,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">技术记事</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
