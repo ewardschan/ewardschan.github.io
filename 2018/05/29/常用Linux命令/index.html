@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="//ewards.cn">
-  <title>Linux系统挂载大容量硬盘方法 | 小土的博客</title>
+  <title>常用Linux命令 | 小土的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="以为硬盘有问题，系统不支持？直接上步骤，linux挂在大硬盘  linux 挂载3T硬盘具体步骤如下：12345678910111213141516171819（1）parted /dev/sdb  （新加硬盘为/dev/sdb）（2）print （查看一下）Model: ATA WDC WD3000FYYZ-0 (scsi)Disk /dev/sdc: 3001GBSector size (l">
-<meta name="keywords" content="技术记事">
+  <meta name="description" content="总有一些命令，用的时候想不起来了。常言道，好记性不如烂笔头，记下来吧  1、查询进程并批量kill1ps -ef|grep java | grep -v grep|awk &apos;&amp;#123;print $2&amp;#125;&apos;|xargs kill -9">
+<meta name="keywords" content="不定期更新">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux系统挂载大容量硬盘方法">
-<meta property="og:url" content="//ewards.cn/2018/05/21/Linux系统挂载大容量硬盘方法/index.html">
+<meta property="og:title" content="常用Linux命令">
+<meta property="og:url" content="//ewards.cn/2018/05/29/常用Linux命令/index.html">
 <meta property="og:site_name" content="小土的博客">
-<meta property="og:description" content="以为硬盘有问题，系统不支持？直接上步骤，linux挂在大硬盘  linux 挂载3T硬盘具体步骤如下：12345678910111213141516171819（1）parted /dev/sdb  （新加硬盘为/dev/sdb）（2）print （查看一下）Model: ATA WDC WD3000FYYZ-0 (scsi)Disk /dev/sdc: 3001GBSector size (l">
+<meta property="og:description" content="总有一些命令，用的时候想不起来了。常言道，好记性不如烂笔头，记下来吧  1、查询进程并批量kill1ps -ef|grep java | grep -v grep|awk &apos;&amp;#123;print $2&amp;#125;&apos;|xargs kill -9">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-21T07:21:17.094Z">
+<meta property="og:updated_time" content="2018-05-29T07:05:41.136Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux系统挂载大容量硬盘方法">
-<meta name="twitter:description" content="以为硬盘有问题，系统不支持？直接上步骤，linux挂在大硬盘  linux 挂载3T硬盘具体步骤如下：12345678910111213141516171819（1）parted /dev/sdb  （新加硬盘为/dev/sdb）（2）print （查看一下）Model: ATA WDC WD3000FYYZ-0 (scsi)Disk /dev/sdc: 3001GBSector size (l">
+<meta name="twitter:title" content="常用Linux命令">
+<meta name="twitter:description" content="总有一些命令，用的时候想不起来了。常言道，好记性不如烂笔头，记下来吧  1、查询进程并批量kill1ps -ef|grep java | grep -v grep|awk &apos;&amp;#123;print $2&amp;#125;&apos;|xargs kill -9">
   
   
     <link rel="icon" href="/assets/blogImg/ewardschan.jpg">
@@ -165,20 +165,20 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Linux系统挂载大容量硬盘方法" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-常用Linux命令" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Linux系统挂载大容量硬盘方法
+      常用Linux命令
     </h1>
   
 
         
-        <a href="/2018/05/21/Linux系统挂载大容量硬盘方法/" class="archive-article-date">
-  	<time datetime="2018-05-21T07:16:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-21</time>
+        <a href="/2018/05/29/常用Linux命令/" class="archive-article-date">
+  	<time datetime="2018-05-29T07:01:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-29</time>
 </a>
         
       </header>
@@ -186,9 +186,9 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>以为硬盘有问题，系统不支持？直接上步骤，linux挂在大硬盘</p>
+<p>总有一些命令，用的时候想不起来了。常言道，好记性不如烂笔头，记下来吧</p>
 </blockquote>
-<h3 id="linux-挂载3T硬盘具体步骤如下："><a href="#linux-挂载3T硬盘具体步骤如下：" class="headerlink" title="linux 挂载3T硬盘具体步骤如下："></a>linux 挂载3T硬盘具体步骤如下：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">（1）parted /dev/sdb  （新加硬盘为/dev/sdb）</span><br><span class="line">（2）<span class="built_in">print</span> （查看一下）</span><br><span class="line">Model: ATA WDC WD3000FYYZ-0 (scsi)</span><br><span class="line">Disk /dev/sdc: 3001GB</span><br><span class="line">Sector size (logical/physical): 512B/512B</span><br><span class="line">Partition Table: msdos</span><br><span class="line">Number  Start  End  Size  Type  File system  Flags</span><br><span class="line">（3）mklabel gpt （设置分区类型为gpt）</span><br><span class="line">（4）mkpart extended 0% 100% （扩展分区，并使用整个硬盘）</span><br><span class="line">（5）<span class="built_in">print</span> （查看一下）</span><br><span class="line">（6）quit                                                            </span><br><span class="line">Information: You may need to update /etc/fstab.</span><br><span class="line">（7）mkfs.ext4 /dev/sdb1（格式化新硬盘）</span><br><span class="line">（8）mount /dev/sdb1 /disk2 （挂载，之后即可使用了）</span><br><span class="line">[root@misc-148-66-5-58 ~]<span class="comment"># blkid /dev/sdb1</span></span><br><span class="line">/dev/sdb1: UUID=<span class="string">"1011b379-ba18-4961-88ad-36ee96b76a95"</span> TYPE=<span class="string">"ext4"</span> PARTLABEL=<span class="string">"extended"</span> PARTUUID=<span class="string">"ffb0ac23-6076-44c5-a4d5-7650242f3d96"</span></span><br><span class="line"></span><br><span class="line">vi /etc/fstab</span><br><span class="line">/dev/sdb1   /home     ext2  auto  0  0</span><br></pre></td></tr></table></figure>
+<h3 id="1、查询进程并批量kill"><a href="#1、查询进程并批量kill" class="headerlink" title="1、查询进程并批量kill"></a>1、查询进程并批量kill</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef|grep java | grep -v grep|awk <span class="string">'&#123;print $2&#125;'</span>|xargs <span class="built_in">kill</span> -9</span><br></pre></td></tr></table></figure>
       
 
       
@@ -201,7 +201,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术记事</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">不定期更新</a>
         		</li>
       		
 		</ul>
@@ -257,7 +257,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://ewards.cn/2018/05/21/Linux系统挂载大容量硬盘方法/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://ewards.cn/2018/05/29/常用Linux命令/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -271,18 +271,9 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2018/05/29/Failed-to-load-JavaHL-Library解决方法/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Failed to load JavaHL Library解决方法
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/05/21/清除memcache的两种方法/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">清除memcache的两种方法</div>
+    <a href="/2018/05/29/Failed-to-load-JavaHL-Library解决方法/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Failed to load JavaHL Library解决方法</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -321,7 +312,7 @@ var _hmt = _hmt || [];
 <script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script>
 <script>
 var gitment = new Gitment({
-  id: "//ewards.cn/2018/05/21/Linux系统挂载大容量硬盘方法/",
+  id: "//ewards.cn/2018/05/29/常用Linux命令/",
   owner: 'ewardschan',
   repo: 'ewardschan.github.io',
   oauth: {
