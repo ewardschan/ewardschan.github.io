@@ -196,7 +196,20 @@ var _hmt = _hmt || [];
 <p><br></p>
 <hr>
 <p><br></p>
-<h3 id="6月9日对阵一年级最强一-6-班，胜则进决赛，负则争夺三四名"><a href="#6月9日对阵一年级最强一-6-班，胜则进决赛，负则争夺三四名" class="headerlink" title="6月9日对阵一年级最强一(6)班，胜则进决赛，负则争夺三四名"></a>6月9日对阵一年级最强一(6)班，胜则进决赛，负则争夺三四名</h3>
+<h3 id="6月9日对阵一年级最强一-6-班，胜则进决赛，负则争夺三四名"><a href="#6月9日对阵一年级最强一-6-班，胜则进决赛，负则争夺三四名" class="headerlink" title="6月9日对阵一年级最强一(6)班，胜则进决赛，负则争夺三四名"></a>6月9日对阵一年级最强一(6)班，胜则进决赛，负则争夺三四名</h3><p>6月9日对阵一(6)班，上半场1：0领先，下半场疏忽守门员，被追平后，又溜进2球，最终以1：3负的成绩进入决赛。</p>
+<p><br></p>
+<hr>
+<p><br></p>
+<h3 id="1：3负，”校长杯”以来第一次输球"><a href="#1：3负，”校长杯”以来第一次输球" class="headerlink" title="1：3负，”校长杯”以来第一次输球"></a>1：3负，”校长杯”以来第一次输球</h3><p>6月9日对阵一(6)班，上半场1：0领先，下半场疏忽守门员，被追平后，又溜进2球，最终以1：3负的成绩进入决赛。<br><img src="https://ws1.sinaimg.cn/large/006tNc79gy1fs9rre5ppqj31kw16o4qq.jpg" alt=""></p>
+<h3 id="点球大战赢得“校长杯”一年级第三名成绩"><a href="#点球大战赢得“校长杯”一年级第三名成绩" class="headerlink" title="点球大战赢得“校长杯”一年级第三名成绩"></a>点球大战赢得“校长杯”一年级第三名成绩</h3><p>第二次跟一(1)班交战，上次打平，他们不服；这次他们在0：0平后的点球大战中，被我放门将扑出一球，最终我们3：2胜出进入前三。</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fs9rsskfjij31400u0aiq.jpg" alt=""></p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1fs9rt0aawsj31400u0th1.jpg" alt=""></p>
+<hr>
+<p>这样的结果，算是完美收官。🎉🎉🎉🎉🎉🎉  </p>
+<p>一个多月来的突击训练，感谢爸爸教练专业又如事业般的投入！！！这份激情，这份认真不只是孩子学习的榜样，也是我们爸爸团学习的榜样！！！💪💪💪  </p>
+<p>孩子们的实力在一年级不是最强的，我们进入前三，赵教练功不可没！！！感谢带领孩子们赢的这份荣誉！！！🙏🙏🙏  </p>
+<p>感谢，致敬！！！</p>
+
       
 
       
@@ -557,6 +570,83 @@ var _hmt = _hmt || [];
 
 
   
+    <article id="post-利用let s encrypt制作免费SSL给站点加绿锁" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/17/利用let s encrypt制作免费SSL给站点加绿锁/">利用Let s Encrypt制作免费SSL给站点加绿锁</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/17/利用let s encrypt制作免费SSL给站点加绿锁/" class="archive-article-date">
+  	<time datetime="2018-05-17T04:25:07.146Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="安装脚本"><a href="#安装脚本" class="headerlink" title="安装脚本:"></a>安装脚本:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https://get.acme.sh | sh</span><br></pre></td></tr></table></figure>
+<h3 id="申请证书"><a href="#申请证书" class="headerlink" title="申请证书"></a>申请证书</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/root/.acme.sh/acme.sh --issue -k 4096 -w /usr/<span class="built_in">local</span>/nginx/html/ -d abc.com -d www.abc.com</span><br></pre></td></tr></table></figure>
+<h3 id="安装证书后期会自动更新"><a href="#安装证书后期会自动更新" class="headerlink" title="安装证书后期会自动更新"></a>安装证书后期会自动更新</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/root/.acme.sh/acme.sh --installcert -d abc.com --keypath /etc/ssl/abc.com.key --fullchainpath /etc/ssl/abc.com.crt --reloadcmd <span class="string">"/usr/local/nginx/sbin/nginx -s reload"</span></span><br></pre></td></tr></table></figure>
+<h3 id="自签名，主要用于默认的vhost"><a href="#自签名，主要用于默认的vhost" class="headerlink" title="自签名，主要用于默认的vhost"></a>自签名，主要用于默认的vhost</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl req -newkey rsa:4096 -nodes -keyout server.key -x509 -days 3650 -out server.crt</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术记事</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/17/利用let s encrypt制作免费SSL给站点加绿锁/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Linux系统部署的tomcat启动时间过长" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -607,83 +697,6 @@ var _hmt = _hmt || [];
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/05/17/Linux系统部署的tomcat启动时间过长/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-利用let s encrypt制作免费SSL给站点加绿锁" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/17/利用let s encrypt制作免费SSL给站点加绿锁/">利用Let s Encrypt制作免费SSL给站点加绿锁</a>
-    </h1>
-  
-
-        
-        <a href="/2018/05/17/利用let s encrypt制作免费SSL给站点加绿锁/" class="archive-article-date">
-  	<time datetime="2018-05-17T04:25:07.146Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="安装脚本"><a href="#安装脚本" class="headerlink" title="安装脚本:"></a>安装脚本:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https://get.acme.sh | sh</span><br></pre></td></tr></table></figure>
-<h3 id="申请证书"><a href="#申请证书" class="headerlink" title="申请证书"></a>申请证书</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/root/.acme.sh/acme.sh --issue -k 4096 -w /usr/<span class="built_in">local</span>/nginx/html/ -d abc.com -d www.abc.com</span><br></pre></td></tr></table></figure>
-<h3 id="安装证书后期会自动更新"><a href="#安装证书后期会自动更新" class="headerlink" title="安装证书后期会自动更新"></a>安装证书后期会自动更新</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/root/.acme.sh/acme.sh --installcert -d abc.com --keypath /etc/ssl/abc.com.key --fullchainpath /etc/ssl/abc.com.crt --reloadcmd <span class="string">"/usr/local/nginx/sbin/nginx -s reload"</span></span><br></pre></td></tr></table></figure>
-<h3 id="自签名，主要用于默认的vhost"><a href="#自签名，主要用于默认的vhost" class="headerlink" title="自签名，主要用于默认的vhost"></a>自签名，主要用于默认的vhost</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl req -newkey rsa:4096 -nodes -keyout server.key -x509 -days 3650 -out server.crt</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术记事</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/17/利用let s encrypt制作免费SSL给站点加绿锁/">展开全文 >></a>
         </p>
       
 
@@ -802,11 +815,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">eclipse</a>
+                <a href="javascript:void(0)" class="js-tag color5">技术记事</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">技术记事</a>
+                <a href="javascript:void(0)" class="js-tag color3">eclipse</a>
               </li>
              
               <li class="article-tag-list-item">
