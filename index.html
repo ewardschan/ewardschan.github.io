@@ -166,6 +166,142 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-云宝支付实时业务监控系统" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/05/云宝支付实时业务监控系统/">云宝支付实时业务监控系统</a>
+    </h1>
+  
+
+        
+        <a href="/2018/07/05/云宝支付实时业务监控系统/" class="archive-article-date">
+  	<time datetime="2018-07-05T08:16:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>监控（Monitor）对服务（Service）的重要性不言而喻。一个配置了有效以及可靠的监控的系统，就像拥有不间断雷达和卫星跟踪保护的民航飞机一样， 让人放心，在关键时刻亦能最大程度的发出警报并减少灾难带来的后果。    </p>
+<p>智能判断样本是否超越警戒线不是一件容易的事情。漏报和过多的误报都不可取。而样本通常由用户行为产生，且不符合严格的解析规律，这对阀值的设置造成很大困难。为了解决这个问题，我们采用观察变化率的方法，把不可解析的样本曲线转换成可解析的曲线，从而简化分析和判断过程，有效地捕捉突发异常事件，并降低误报率。</p>
+</blockquote>
+<h3 id="一、简介"><a href="#一、简介" class="headerlink" title="一、简介"></a>一、简介</h3><p>[商户系统/平台]依靠[上游通道]作为支付平台，而[云宝系统]处于商户系统和上游通道之间。  </p>
+<p>我们负责开发和维护就是其中的[云宝系统]部分。通常与钱相关的系统都比较重要，稳定性要求也相对比较高。所以 [云报系统] 这条线必须保持时刻畅通以保障终端用户的支付体验。一旦发生了系统问题我们必须在第一时间知道并予以解决，同时把对用户的影响降低到最小。这一切都仰仗对其的监控能力。</p>
+<h3 id="二、目标"><a href="#二、目标" class="headerlink" title="二、目标"></a>二、目标</h3><p>一个合格有效的监控，在具有定性感知错误的能力外还要能定量的回答：什么时间（when），在哪一个环节（where），出了什么错（what）。  </p>
+<p>When（实时）：实时性可理解为灾难发生到被感知的延迟时间 。这个时间当然是越短约好。但是出于对资源的考虑，对不同功能的系统，实时性的要求不完全一样。目前我们对Payment定义的实时为5分钟延迟。  </p>
+<p>Where（定位）：下游系统被理解为上游系统的依赖（Dependency），所以PayPal是Payment 的依赖，Payment又是Checkout的依赖。当支付无法完成的时候，有可能是Payment本身出了问题，也有可能是PayPal出了问题。迅速的定位是解决问题的关键。  </p>
+<p>通常的做法是对自己监控，同时对下游做监控，因为当别人问起来的时候，我们就可以告诉他Payment有没有问题，是否是由于PayPal不Work而导致的，等等。常常被忽略的是对上游系统的监控，作为身在同一个战壕里的战友，Checkout 出了状况Payment也有责任及时感知并通知，毕竟都是对用户体验的影响。  </p>
+<p>What（症结）：也理解为Root Cause。有可能是数据库连接失败，有可能是HTTPS证书过期，有可能是集群中一台机器掉线，等等。监控系统给出的信息量越多越能帮助我们找到这个Root Cause，从而更迅速的解决问题。  </p>
+<p>另外还有两点，也非常重要：<br>1.多重保护：最好有两套或更多不同监控机制，互相参考，互为备份，以防其中一个出现失误。<br>2.误报率：保险起见通常监控会比较保守，宁可错报也不能漏报。但是可以想象如果一个监控频繁地发出报警，就变相形成了一个 Spam。会让人麻木，同时淹没真正有效的报警。所以误报率需要尽可能的低。</p>
+<h3 id="三、实现"><a href="#三、实现" class="headerlink" title="三、实现"></a>三、实现</h3><p>实现过程可以概括为三个部分：</p>
+<ul>
+<li>Keep a log：有2套Log机制：<ul>
+<li>1）对每一个进来的请求，都向mysql数据库中插入一条Audit Log。记录下输入，输出，时间，上游通道的响应码、响应信息，等等。  </li>
+<li>2）把每一个云宝系统内部发生的异常发送到一个BI系统(商业智能系统或者计算机辅助决策系统)。</li>
+</ul>
+</li>
+<li>Aggregate：每隔5分钟对Audit Log 做一次 aggregation。统计出所有从上游通道接收到的Response Code。把结果记录在Mongo DB里备用。对于BI系统里的记录，BI系统也会有相应的Aggregation。</li>
+<li>Analysis：对aggregate的结果做分析，找出异常的情况，发出报警，这是重点。</li>
+</ul>
+<p>第一步非常简单，目前日志有记录，只是完善到什么程度，这是监控的数据来源和基石。重点在确保数据的准确。同时记录Audit Log的部分可以采用异步线程池，以减少对主业务进程的影响。</p>
+<p>Sample:   </p>
+<table>
+<thead>
+<tr>
+<th>AUDIT_ID</th>
+<th>ERROR_NAME</th>
+<th>ERROR_DOMAIN</th>
+<th>CREATION_DATE  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5000454</td>
+<td>\&lt;null></td>
+<td>pay.v6pay.com</td>
+<td>20180705150346</td>
+</tr>
+<tr>
+<td>5000455</td>
+<td>\&lt;null></td>
+<td>pay.v6pay.com</td>
+<td>20180705150446</td>
+</tr>
+<tr>
+<td>…</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>第二步中的时间间隔可调。间隔时间越短越实时，但是产生的aggregation数据就越多，事后分析的计算量也越大。反之间隔时间越长，实时性越差，如果一天一次aggregation那就只能称之为Report。这需要根据资源和系统重要性做权衡。</p>
+<p>Sample:<br>Aggregation的结果是放在Mongo DB里的，所以以JSON 文件格式表示：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;  </span><br><span class="line">  operationName : <span class="string">"someName"</span>,</span><br><span class="line">  startInMillisecond : <span class="string">"1420790400000"</span>,</span><br><span class="line">  endInMillisecond : <span class="string">"1420876800000"</span>,</span><br><span class="line">  data : &#123;</span><br><span class="line">    CART_ID_NOT_FOUND : 6,</span><br><span class="line">    VALIDATION_ERROR: 5,</span><br><span class="line">    NULL : 982</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样可以得出，这5分钟内分别收到了6个CART_ID_NOT_FOUND和5个VALIDATION_ERROR，NULL 即没有Error Code表示成功的请求，共982个。搜集一天的数据后可以为每一个Error Code 得到一条曲线，叠加在一起就可以得到一幅图。</p>
+<p>第三步比较值得讨论，其困难点之处在于如何判断出异常情况：  </p>
+<ol>
+<li>统计出现的错误数量；  </li>
+<li>统计错误率；  </li>
+<li>寻找规律性的参考标准；  </li>
+<li></li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">云宝监控、支付监控、监控</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/07/05/云宝支付实时业务监控系统/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-用心拼搏，必会收获" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -570,83 +706,6 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-利用let s encrypt制作免费SSL给站点加绿锁" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/17/利用let s encrypt制作免费SSL给站点加绿锁/">利用Let s Encrypt制作免费SSL给站点加绿锁</a>
-    </h1>
-  
-
-        
-        <a href="/2018/05/17/利用let s encrypt制作免费SSL给站点加绿锁/" class="archive-article-date">
-  	<time datetime="2018-05-17T04:25:07.146Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="安装脚本"><a href="#安装脚本" class="headerlink" title="安装脚本:"></a>安装脚本:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https://get.acme.sh | sh</span><br></pre></td></tr></table></figure>
-<h3 id="申请证书"><a href="#申请证书" class="headerlink" title="申请证书"></a>申请证书</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/root/.acme.sh/acme.sh --issue -k 4096 -w /usr/<span class="built_in">local</span>/nginx/html/ -d abc.com -d www.abc.com</span><br></pre></td></tr></table></figure>
-<h3 id="安装证书后期会自动更新"><a href="#安装证书后期会自动更新" class="headerlink" title="安装证书后期会自动更新"></a>安装证书后期会自动更新</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/root/.acme.sh/acme.sh --installcert -d abc.com --keypath /etc/ssl/abc.com.key --fullchainpath /etc/ssl/abc.com.crt --reloadcmd <span class="string">"/usr/local/nginx/sbin/nginx -s reload"</span></span><br></pre></td></tr></table></figure>
-<h3 id="自签名，主要用于默认的vhost"><a href="#自签名，主要用于默认的vhost" class="headerlink" title="自签名，主要用于默认的vhost"></a>自签名，主要用于默认的vhost</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl req -newkey rsa:4096 -nodes -keyout server.key -x509 -days 3650 -out server.crt</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术记事</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/17/利用let s encrypt制作免费SSL给站点加绿锁/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-Linux系统部署的tomcat启动时间过长" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -697,6 +756,83 @@ var _hmt = _hmt || [];
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/05/17/Linux系统部署的tomcat启动时间过长/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-利用let s encrypt制作免费SSL给站点加绿锁" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/17/利用let s encrypt制作免费SSL给站点加绿锁/">利用Let s Encrypt制作免费SSL给站点加绿锁</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/17/利用let s encrypt制作免费SSL给站点加绿锁/" class="archive-article-date">
+  	<time datetime="2018-05-17T04:25:07.146Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="安装脚本"><a href="#安装脚本" class="headerlink" title="安装脚本:"></a>安装脚本:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https://get.acme.sh | sh</span><br></pre></td></tr></table></figure>
+<h3 id="申请证书"><a href="#申请证书" class="headerlink" title="申请证书"></a>申请证书</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/root/.acme.sh/acme.sh --issue -k 4096 -w /usr/<span class="built_in">local</span>/nginx/html/ -d abc.com -d www.abc.com</span><br></pre></td></tr></table></figure>
+<h3 id="安装证书后期会自动更新"><a href="#安装证书后期会自动更新" class="headerlink" title="安装证书后期会自动更新"></a>安装证书后期会自动更新</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/root/.acme.sh/acme.sh --installcert -d abc.com --keypath /etc/ssl/abc.com.key --fullchainpath /etc/ssl/abc.com.crt --reloadcmd <span class="string">"/usr/local/nginx/sbin/nginx -s reload"</span></span><br></pre></td></tr></table></figure>
+<h3 id="自签名，主要用于默认的vhost"><a href="#自签名，主要用于默认的vhost" class="headerlink" title="自签名，主要用于默认的vhost"></a>自签名，主要用于默认的vhost</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl req -newkey rsa:4096 -nodes -keyout server.key -x509 -days 3650 -out server.crt</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术记事</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/17/利用let s encrypt制作免费SSL给站点加绿锁/">展开全文 >></a>
         </p>
       
 
@@ -815,6 +951,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">云宝监控、支付监控、监控</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">技术记事</a>
               </li>
              
@@ -878,7 +1018,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">Ewards，&lt;br&gt;10余年互联网、移动互联网行业经验，&lt;br&gt;精通互联网彩票以及聚合支付业务；&lt;br&gt;目前管理一家创业公司&lt;br/&gt;&lt;br/&gt;恋一人白头，择一城终老&lt;br&gt;套一世A股，还一生房贷</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">Ewards，&lt;br&gt;10余年互联网、移动互联网行业经验，&lt;br&gt;精通互联网彩票以及聚合支付业务；&lt;br&gt;目前就职于一家聚合支付创业公司&lt;br/&gt;&lt;br/&gt;恋一人白头，择一城终老&lt;br&gt;套一世A股，还一生房贷</div>
   	  	
     	</section>
     
