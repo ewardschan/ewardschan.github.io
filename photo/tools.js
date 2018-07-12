@@ -1,6 +1,6 @@
  "use strict";
     const fs = require("fs");
-    const path = "../../../EcBlog-Back-Up/photos";
+    const path = "../../photos";
 
     fs.readdir(path, function (err, files) {
         if (err) {
@@ -9,11 +9,7 @@
         let arr = [];
         (function iterator(index) {
             if (index == files.length) {
-                fs.writeFile("output.json", JSON.stringify(arr, null, "\t"),function(err){  
-                if(err)  
-                    return console.error(err);  
-                console.log('写入文件成功');  
-            });
+                fs.writeFile("output.json", JSON.stringify(arr, null, "\t"),function(){});
                 return;
             }
 
