@@ -6,13 +6,13 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://www.ewards.cn">
-  <title>Tag: 不定期更新 | 小土的博客</title>
+  <title>小土的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="10余年互联网、移动互联网行业研发经验，精通互联网彩票以及聚合支付业务。">
 <meta name="keywords" content="java,golang,js,dubbo,zookeeper,spring,spring-boot,spring-cload,互联网,移动互联网,彩票,支付,第三方支付,微信支付,微信扫码,支付宝,支付宝H5,支付宝扫码,银联快捷,小土">
 <meta property="og:type" content="website">
 <meta property="og:title" content="小土的博客">
-<meta property="og:url" content="https://www.ewards.cn/tags/不定期更新/index.html">
+<meta property="og:url" content="https://www.ewards.cn/page/2/index.html">
 <meta property="og:site_name" content="小土的博客">
 <meta property="og:description" content="10余年互联网、移动互联网行业研发经验，精通互联网彩票以及聚合支付业务。">
 <meta property="og:locale" content="default">
@@ -166,58 +166,86 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
-  
+    <article id="post-清除memcache的两种方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/05/29/常用Linux命令/" class="archive-article-date">
-  	<time datetime="2018-05-29T07:01:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-29</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
     <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/29/常用Linux命令/">常用Linux命令</a>
+      <a class="article-title" href="/2018/05/21/清除memcache的两种方法/">清除memcache的两种方法</a>
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2018/05/21/清除memcache的两种方法/" class="archive-article-date">
+  	<time datetime="2018-05-21T06:24:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="默认memcache会监听11221端口，如果想清空服务器上memecache的缓存，大家一般使用的是："><a href="#默认memcache会监听11221端口，如果想清空服务器上memecache的缓存，大家一般使用的是：" class="headerlink" title="默认memcache会监听11221端口，如果想清空服务器上memecache的缓存，大家一般使用的是："></a>默认memcache会监听11221端口，如果想清空服务器上memecache的缓存，大家一般使用的是：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">telnet localhost 11211  </span><br><span class="line">flush_all</span><br></pre></td></tr></table></figure>
+<h3 id="同样也可以使用："><a href="#同样也可以使用：" class="headerlink" title="同样也可以使用："></a>同样也可以使用：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"flush_all"</span> | nc localhost 11211</span><br></pre></td></tr></table></figure>
+<h3 id="使用flush-all-后并不是删除memcache上的key，而是置为过期"><a href="#使用flush-all-后并不是删除memcache上的key，而是置为过期" class="headerlink" title="使用flush_all 后并不是删除memcache上的key，而是置为过期"></a>使用flush_all 后并不是删除memcache上的key，而是置为过期</h3>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">不定期更新</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术记事</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/21/清除memcache的两种方法/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-  
-    </div></section>
-  
 
-    
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    </nav>
+  
 
 
           </div>
@@ -239,10 +267,10 @@ var _hmt = _hmt || [];
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: false,
+		isHome: true,
 		isPost: false,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
